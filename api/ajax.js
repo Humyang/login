@@ -1,8 +1,8 @@
 
 require('es6-promise').polyfill();
 var fetch = require('isomorphic-fetch');
-import * as BASE from './base.js'
-var CODE = require('../../serve/constant.js').CODE
+// import * as BASE from './base.js'
+// var CODE = require('../../serve/constant.js').CODE
 import {
     IP,
     HTTP_FAIL
@@ -24,15 +24,7 @@ const preProcessRsp = function(store,reslove,reject) {
 
 const mFetch = function(path,data,token) {
     return new Promise(function(reslove,reject){
-        let comb_data = {}
-        if(data===undefined){
-            data = {}
-        }else{
-            comb_data = data
-            if(data.token === undefined){
-                comb_data = Object.assign(data,{token:BASE.getToken()})
-            }
-        }
+        
         let root = this
         fetch(IP+path,
         {
@@ -41,7 +33,7 @@ const mFetch = function(path,data,token) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(comb_data)
+          body: JSON.stringify(data)
         })
         .then(function(response) {
             // HTTP 错误处理

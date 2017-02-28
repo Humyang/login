@@ -9,6 +9,7 @@ var mongo = require('koa-mongo')
 var CONSTANT = require('./constant.js')
 var objectAssign = require('object-assign')
 var LOGIN = require('./module/login.js')
+var CONFIG = require('./module/config.js')
 app.use(cors())
 // 验证账号重复性
 router.all('/valid/username/:username',LOGIN.username_repeat)
@@ -61,6 +62,6 @@ app.use(router.routes()).use(router.allowedMethods());
 //     console.log(22222)
 // })
 
-app.listen(8081)
+app.listen(CONFIG.port)
 
-console.log("listen serve on port 8081")
+console.log("listen serve on port "+CONFIG.port)
