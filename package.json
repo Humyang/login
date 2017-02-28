@@ -1,0 +1,31 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "验证码因为 windows 的 nodejs 不好处理图形，留到 linux 环境处理",
+  "main": "index.js",
+  "dependencies": {
+    "koa": "^1.2.4",
+    "koa-better-body": "^3.0.2",
+    "koa-cors": "0.0.16",
+    "koa-mongo": "^0.6.0",
+    "koa-router": "^5.4.0",
+    "koa-static": "^2.0.0",
+    "md5": "^2.2.1",
+    "mocha": "^2.5.3",
+    "uid": "0.0.2"
+  },
+  "scripts": {
+    "test_login": "mocha --compilers js:babel-register --recursive test/login.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Humyang/login.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Humyang/login/issues"
+  },
+  "homepage": "https://github.com/Humyang/login#readme"
+}
