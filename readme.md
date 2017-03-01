@@ -1,25 +1,26 @@
-验证码因为 windows 的 nodejs 不好处理图形，留到 linux 环境处理
+```
+npm install koa-flogin
 
-数据结构
+```
+
+usage:
+
+
+```
+var app = require('koa')()
+var body = require('koa-better-body')
+var router = require('koa-router')()
+var LOGIN = require('./module/login.js')
+router.post('/login_status_check',LOGIN.login_check(),function *(next){
+    this.body = {
+        status:true,
+        msg:'登录中'
+    }
+})
+```
+
 
 ```js
-单词列表
-{
-    id,
-    word,
-    describe,
-    end_time,
-    user
-}
-
-Token 库
-｛
-token,
-verify_code,
-create_time, 
-expire_time, //过期时间
-is_verify //登录成功后设为 true
-｝
 
 登录库
 ｛

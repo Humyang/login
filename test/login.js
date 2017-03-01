@@ -44,39 +44,21 @@ describe('登录流程测试', function() {
         })
     })
 
-    it('测试注册-登录-再次登录-使用旧token测试获取数据', function(done) {
+    it('测试注册-登录-再次登录-旧token应当仍然有效', function(done) {
         co(function*(){
             let username = 'test'+uid(10)
-             // = expect.createSpy()
-            // localhost.href = expect.createSpy()
-            // var verifycode = yield API.verify_code()
-            // expect(verifycode.status).toBe(true,'获取注册验证码')
-
             let regiest_res = yield API.regiest(username,'password1','123456')
             expect(regiest_res.status).toBe(true,'注册账号')
-
-            // var verify_login = yield API.verify_code()
-            // expect(verify_login.status).toBe(true,'获取登录验证码')
             var login = yield API.login(username,'password1',123456)
             expect(login.status).toBe(true,'登录')
 
             let token = login.token
 
-            // BASE.saveToken = expect.createSpy().andReturn(1)
-
-            // BASE.getToken = expect.createSpy().andReturn(login.token)
-
-            var listall = yield API.listGetAll(0,20,login.token)
-            expect(listall.status).toBe(true,'获取数据')
-
-            //再次登录，使旧token失效
-            // var verifycode2 = yield API.verify_code()
-            // expect(verifycode2.status).toBe(true,'获取登录验证码2')
             var login2 = yield API.login(username,'password1',123456)
             expect(login2.status).toBe(true,'再次登录，使旧token失效')
-            //使用旧 token 获取数据，反馈失败
-            var listall2 = yield API.listGetAll(0,20,login.token)
-            console.log('listall2',listall2)
+            
+            var result = yield API.login_status_check(token)
+            expect(result.status).toBe(true,'测试旧token有效性，应该有效')
             done()
             
         }).catch(function(err){
@@ -131,7 +113,7 @@ describe('登录流程测试', function() {
         co(function*(){
             // var verifycode = yield API.verify_code()
             // expect(verifycode.status).toBe(true,'获取注册验证码')
-            let regiest_res = yield API.login('','','123456')
+            let regiest_res = yield API.login('','')
             done('出现错误，应该提示没有找到此用户')
         }).catch(function(err){
             if(err.STATUSCODE === CODE.LOGIN_EMPTY.STATUSCODE){
@@ -149,12 +131,12 @@ describe('登录流程测试', function() {
             // var verifycode = yield API.verify_code()
             // expect(verifycode.status).toBe(true,'获取注册验证码')
 
-            let regiest_res = yield API.regiest(username,'password1','123456')
+            let regiest_res = yield API.regiest(username,'password1')
             expect(regiest_res.status).toBe(true,'注册账号')
 
             // var verifycode2 = yield API.verify_code()
-            expect(verifycode2.status).toBe(true,'获取注册验证码')
-            let regiest_res2 = yield API.login(username,1231241,'123456')
+            // expect(verifycode2.status).toBe(true,'获取注册验证码')
+            let regiest_res2 = yield API.login(username,1231241)
             done('出现错误，应该提示帐号密码错误')
         }).catch(function(err){
             if(err.STATUSCODE === CODE.USERNAME_ERROR.STATUSCODE){

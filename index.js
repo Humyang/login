@@ -6,10 +6,10 @@ var mongo = require('koa-mongo')
 
 
 
-var CONSTANT = require('./constant.js')
+var CONSTANT = require('./lib/constant.js')
 var objectAssign = require('object-assign')
-var LOGIN = require('./module/login.js')
-var CONFIG = require('./module/config.js')
+var LOGIN = require('./lib/login.js')
+var CONFIG = require('./lib/config.js')
 app.use(cors())
 // 验证账号重复性
 router.all('/valid/username/:username',LOGIN.username_repeat)
@@ -17,6 +17,13 @@ router.all('/valid/username/:username',LOGIN.username_repeat)
 router.post('/regiest',/*LOGIN.verify_code(),*/LOGIN.regiest)
 //登录
 router.post('/login',/*LOGIN.verify_code(),*/LOGIN.login)
+//登录
+router.post('/login_status_check',LOGIN.login_check(),function *(next){
+    this.body = {
+        status:true,
+        msg:'登录中'
+    }
+})
 //获取验证码
 router.all('/verify_code',LOGIN.verifycode)
 
