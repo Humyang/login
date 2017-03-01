@@ -1,8 +1,8 @@
 import expect from 'expect'
-import * as API from '../api/main.js'
+import * as API from './api/main.js'
 import co from 'co'
 import uid from 'uid'
-var CODE =  require('../constant.js').CODE
+var CODE =  require('../lib/constant.js').CODE
 
 // import * as BASE from '../api/base.js'
 

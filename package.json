@@ -1,6 +1,6 @@
 {
   "name": "flogin",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "login api base on koa,connect to mongodb",
   "main": "lib/login.js",
   "dependencies": {
